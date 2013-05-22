@@ -1,0 +1,7 @@
+/.bundle
+/.ruby-version
+/db/*.sqlite3
+/log/*.log
+/tmp
+/config/database.yml
+/.rvmrc

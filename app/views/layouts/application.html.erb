@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Jeffs</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div class="container">
+  <h1>Jeff's General Store</h1>
+  <h2>We Only Sell Candy and Hockey Memorabilia</h2>
+  <hr/>
+  <%= yield %>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+defaults: &defaults
+  adapter: postgresql
+  encoding: utf8
+  pool: 5
+  username: eng
+
+development:
+  database: jeffs_development
+  <<: *defaults
+
+test:
+  database: jeffs_test
+  <<: *defaults
+
+production:
+  database: jeffs
+  <<: *defaults
