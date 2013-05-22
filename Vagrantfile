@@ -18,7 +18,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.define :provisioned do |prov|
     prov.vm.box = "provisioned"
-    prov.vm.box_url = ""
+    prov.vm.box_url = "http://deploying-rails.s3.amazonaws.com/precise32-provisioned.box"
     prov.vm.network :private_network, ip: "192.168.33.10"
   end
 end
