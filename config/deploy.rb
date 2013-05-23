@@ -8,7 +8,10 @@ role :app, "192.168.33.10"
 role :db,  "192.168.33.10"
 
 set :user, "deploy"
-set :deploy_to, "/home/deployer/apps/jeffs-store"
+set :deploy_to, "/home/deploy/apps/jeffs-store"
+
+set :use_sudo, false
+set :normalize_asset_timestamps, false
 
 namespace :deploy do
   task :start do ; end
@@ -24,12 +27,13 @@ after "deploy:update_code","deploy:dbyml_symlink"
 namespace :deploy do
 
   task :dbyml_upload do
-    data = File.open('./apps/shared/config/database.yml', 'rb').read
-    puts data, "#{shared_dir}/config/database.yml"
+    run "mkdir -p #{shared_path}/config"
+    data = File.open('./apps/jeffs-store/shared/config/database.yml', 'rb').read
+    put data, "#{shared_path}/config/database.yml"
   end
 
   task :dbyml_symlink do
-    run "ln -nfs #{deploy_to}/#{shared_dir}/config/database.yml #{release_path}/config/database.yml"
+    run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
   end
 
 end
