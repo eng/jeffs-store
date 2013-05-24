@@ -2,7 +2,6 @@
 # vi: set ft=ruby :
 
 $script = <<SCRIPT
-echo 'gem: --no-ri --no-rdoc' > ~/.gemrc
 echo 'export LC_ALL=en_US.UTF-8' >> /etc/bash.bashrc
 echo 'export LANG=en_US.UTF-8' >> /etc/bash.bashrc
 echo 'export LANGUAGE=en_US.UTF-8' >> /etc/bash.bashrc
