@@ -7,9 +7,4 @@ class CartTest < ActiveSupport::TestCase
     @products = Product.all
     @cart = Cart.first
   end
-
-  test 'should be able to add an item to cart' do
-    @cart.add_product(jersey)
-    assert_equal 1, @cart.items_count
-  end
 end
