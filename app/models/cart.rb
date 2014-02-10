@@ -14,4 +14,28 @@ class Cart < ActiveRecord::Base
     self.cart_items.count
   end
 
+  def subtotal
+    self.cart_items.collect { |cart_item| cart_item.product.price * cart_item.qty }.inject(:+)
+  end
+
+  def tax
+    subtotal * 0.06
+  end
+
+  def shipping
+    5.0
+  end
+
+  def total
+    subtotal + tax + shipping
+  end
+
+  def remove_product(product)
+    self.cart_items.where(product: product).first.destroy
+  end
+
+  def empty
+    self.cart_items.clear
+  end
+
 end
