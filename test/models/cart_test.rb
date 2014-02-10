@@ -57,4 +57,12 @@ class CartTest < ActiveSupport::TestCase
     assert_equal 0, @cart.items_count
   end
 
+  test 'an empty cart should have a subtotal of $0' do
+    assert_equal 0.0, @cart.subtotal
+  end
+
+  test 'an empty cart should have shipping of $0' do
+    assert_equal 0.0, @cart.shipping
+  end
+
 end

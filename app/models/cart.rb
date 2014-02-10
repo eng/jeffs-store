@@ -15,7 +15,7 @@ class Cart < ActiveRecord::Base
   end
 
   def subtotal
-    self.cart_items.collect { |cart_item| cart_item.product.price * cart_item.qty }.inject(:+)
+    self.cart_items.collect { |cart_item| cart_item.product.price * cart_item.qty }.inject(:+) || 0
   end
 
   def tax
@@ -23,7 +23,7 @@ class Cart < ActiveRecord::Base
   end
 
   def shipping
-    5.0
+    subtotal > 0 ? 5.0 : 0.0
   end
 
   def total

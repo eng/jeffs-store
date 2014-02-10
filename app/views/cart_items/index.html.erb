@@ -1,0 +1,12 @@
+<ul>
+  <% @cart_items.each do |cart_item| %>
+    <li><%= link_to 'Remove', cart_item, method: :delete %> <%= cart_item.product.name %> x <%= cart_item.qty %></li>
+  <% end %>
+</ul>
+
+<p>Subtotal: <%= number_to_currency @cart.subtotal %></p>
+<p>Tax: <%= number_to_currency @cart.tax %></p>
+<p>Shipping: <%= number_to_currency @cart.shipping %></p>
+<p>Total: <%= number_to_currency @cart.total %></p>
+
+<p><%= link_to 'Empty cart', clear_cart_items_path %></p>
