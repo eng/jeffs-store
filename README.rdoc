@@ -2,6 +2,6 @@
 
 After cloning, do the usual dance:
 
-rake db:create
+cp config/database-sample.yml config/database.yml
 rake db:migrate
 rake db:seed
