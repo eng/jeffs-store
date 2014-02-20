@@ -1,1 +1,7 @@
-== Sample Application for The Starter League - Deploying Rails
+== Sample Application for Starter School – DevOps and TDD
+
+After cloning, do the usual dance:
+
+rake db:create
+rake db:migrate
+rake db:seed
