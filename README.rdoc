@@ -2,8 +2,7 @@
 
 After cloning, do the usual dance:
 
-```
-cp config/database-sample.yml config/database.yml
-rake db:migrate
-rake db:seed
-```
+    cp config/database-sample.yml config/database.yml
+    rake db:migrate
+    rake db:seed
+
