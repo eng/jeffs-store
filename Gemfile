@@ -10,6 +10,10 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
+group :development do
+  gem 'capistrano', '~> 2'
+end
+
 group :doc do
   gem 'sdoc', require: false
 end
