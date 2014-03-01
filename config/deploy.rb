@@ -1,11 +1,14 @@
+require 'bundler/capistrano'
+
 set :application, "jeffs-store"
 set :repository,  "https://github.com/eng/jeffs-store.git"
 set :scm, :git
 set :deploy_via, :remote_cache
+set :branch, 'capistrano'
 
 role :web, "192.168.33.10"
 role :app, "192.168.33.10"
-role :db,  "192.168.33.10"
+role :db,  "192.168.33.10", primary: true
 
 set :user, "deploy"
 set :deploy_to, "/home/deploy/apps/jeffs-store"
