@@ -25,7 +25,7 @@ namespace :deploy do
 end
 
 after "deploy:setup", "deploy:dbyml_upload"
-after "deploy:update_code","deploy:dbyml_symlink"
+before "deploy:assets:precompile", "deploy:link_db"
 
 namespace :deploy do
 
@@ -34,9 +34,8 @@ namespace :deploy do
     data = File.open('./apps/jeffs-store/shared/config/database.yml', 'rb').read
     put data, "#{shared_path}/config/database.yml"
   end
-
-  task :dbyml_symlink do
-    run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+ 
+  task :link_db do
+    run "ln -s #{shared_path}/config/database.yml #{latest_release}/config/database.yml"
   end
-
 end
