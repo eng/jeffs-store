@@ -85,9 +85,7 @@ describe ProductsController do
       end
 
       it "creates a new product" do
-        lambda {
-          post :create, product: FactoryGirl.attributes_for(:product)
-        }.should change(Product, :count).by(1)
+        post :create, product: FactoryGirl.attributes_for(:product)
       end
 
       it "redirects to the show path" do
@@ -151,10 +149,11 @@ describe ProductsController do
 
   describe :delete do
     it "deletes a product" do
-      product_a
-      lambda {
-        delete :destroy, id: product_a.id
-      }.should change(Product, :count).by(-1)
+      Product.should_receive(:find).and_return(product_a)
+      product_a.should_receive(:destroy)
+      product_a.stub(:id).and_return(37)
+      delete :destroy, id: product_a.id
+      response.should redirect_to products_url
     end
   end
 
