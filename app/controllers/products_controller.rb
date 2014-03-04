@@ -39,7 +39,7 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
+        format.html { redirect_to product_url(@product), notice: 'Product was successfully created.' }
       else
         format.html { render action: "new" }
       end
@@ -52,7 +52,7 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.update_attributes(product_params)
-        format.html { redirect_to @product, notice: 'Product was successfully updated.' }
+        format.html { redirect_to product_url(@product), notice: 'Product was successfully updated.' }
       else
         format.html { render action: "edit" }
       end

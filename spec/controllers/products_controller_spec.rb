@@ -1,13 +1,16 @@
 require 'spec_helper'
 
 describe ProductsController do
-  let (:product_a) { FactoryGirl.create(:product) }
-  let (:product_b) { FactoryGirl.create(:product) }
+  let (:product_a) { FactoryGirl.build(:product) }
+  let (:product_b) { FactoryGirl.build(:product) }
   let (:products) { [product_a, product_b] }
   
   describe :index do
+    before :each do
+      Product.should_receive(:all).and_return(products)
+    end
+
     it "loads the product list" do
-      products # ensure everything's loaded in the DB
       get :index
       assigns(:products).should eq(products)
     end
@@ -18,7 +21,6 @@ describe ProductsController do
     end
 
     it "renders json for json" do
-      products
       get :index, format: :json
       json = JSON.parse(response.body)
       json.length.should eq(2)
@@ -26,6 +28,11 @@ describe ProductsController do
   end
 
   describe :show do
+    before :each do
+      Product.should_receive(:find).and_return(product_a)
+      product_a.stub(:id).and_return(37)
+    end
+
     it "loads the proper product" do
       get :show, id: product_a.id
       assigns(:product).should eq(product_a)
@@ -50,6 +57,10 @@ describe ProductsController do
   end
 
   describe :edit do
+    before :each do
+      Product.should_receive(:find).and_return(product_a)
+      product_a.stub(:id).and_return(37)
+    end
     it "finds a product" do
       get :edit, id: product_a.id
       assigns(:product).should eq(product_a)
@@ -62,7 +73,17 @@ describe ProductsController do
   end
 
   describe :create do
+    before :each do
+      product_a
+      product_a.stub(:id).and_return(37)
+      Product.should_receive(:new).and_return(product_a)
+    end
+
     describe :success do
+      before :each do
+        product_a.should_receive(:save).and_return(true)
+      end
+
       it "creates a new product" do
         lambda {
           post :create, product: FactoryGirl.attributes_for(:product)
@@ -76,6 +97,9 @@ describe ProductsController do
     end
 
     describe :failure do
+      before :each do
+        product_a.should_receive(:save).and_return(false)
+      end
       it "doesn't create a product" do
         lambda {
           post :create, product: { foo: "bar" }
@@ -90,10 +114,17 @@ describe ProductsController do
   end
 
   describe :update do
+    before :each do
+      Product.should_receive(:find).and_return(product_a)
+      product_a.stub(:id).and_return(37)
+    end
+
     describe :success do
+      before :each do
+        product_a.should_receive(:update_attributes).and_return(true)
+      end
       it "updates a product" do
         put :update, id: product_a.id, product: { name: "Puck" }
-        product_a.reload.name.should eq("Puck")
       end
 
       it "redirects to show the product" do
@@ -103,10 +134,12 @@ describe ProductsController do
     end
 
     describe :failure do
+      before :each do
+        product_a.should_receive(:update_attributes).and_return(false)
+      end
       it "does not update a product" do
         name = product_a.name
         put :update, id: product_a.id, product: { name: "" }
-        product_a.reload.name.should eq(name)
       end
 
       it "renders the edit action" do
