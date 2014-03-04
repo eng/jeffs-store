@@ -85,9 +85,7 @@ describe ProductsController do
       end
 
       it "creates a new product" do
-        lambda {
-          post :create, product: FactoryGirl.attributes_for(:product)
-        }.should change(Product, :count).by(1)
+        post :create, product: FactoryGirl.attributes_for(:product)
       end
 
       it "redirects to the show path" do
