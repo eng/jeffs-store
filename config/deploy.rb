@@ -6,7 +6,6 @@ set :application, "jeffs-store"
 set :repository,  "https://github.com/eng/jeffs-store.git"
 set :scm, :git
 set :deploy_via, :remote_cache
-set :branch, 'capistrano'
 
 role :web, "192.168.33.10"
 role :app, "192.168.33.10"
