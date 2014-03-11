@@ -9,8 +9,10 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
-gem 'capistrano', '~> 2'
-gem 'rvm-capistrano'
+gem 'capistrano', '~> 3'
+gem 'capistrano-bundler'
+gem 'capistrano-rails'
+gem 'capistrano-rvm'
 
 group :doc do
   gem 'sdoc', require: false
